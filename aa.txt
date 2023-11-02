@@ -1,0 +1,77 @@
+let botonRegistro = document.getElementById("botonRegistro")
+
+
+botonRegistro.addEventListener("click", async()=>{
+
+    let buscarRegistro = document.getElementById("buscarRegistro").value;
+
+    let db =  await dataUsers();
+
+    console.log(buscarRegistro);
+    let traerRegistro = db.filter((element)=> buscarRegistro == JSON.parse(element.id));    
+
+    console.log(traerRegistro);
+    
+    let myElement = document.createElement('div');
+
+    if(buscarRegistro == ""){
+
+        myElement.innerHTML="";
+
+        db.forEach(element =>{
+
+            myElement.innerHTML += ` 
+
+            
+
+            <div class="col-6">
+            ID = ${element.id}<br>
+            name = ${element.name}<br>
+            lastname = ${element.lastname}<br>
+             <hr>
+
+              </div>
+        
+            `
+            myElement.classList.add("text-start","text-white", "m-auto", "row")
+            nodo.appendChild(myElement)
+    
+
+
+        })
+    
+
+    }
+
+    else if(traerRegistro){
+
+    
+      traerRegistro.forEach(element => {
+          
+       
+
+
+        myElement.innerHTML = ` 
+
+        ID = ${element.id}<br>
+        name = ${element.name}<br>
+        lastname = ${element.lastname}<br>
+    
+    
+        `
+
+        myElement.classList.add("text-start","text-white", "m-auto")
+        nodo.appendChild(myElement)
+
+    });
+
+     }
+
+     else{
+
+      error();
+
+     }
+
+   
+});
